@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const crypto = require("crypto")
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -11,6 +12,8 @@ const userSchema = new mongoose.Schema({
         country: String,
     },
     phoneNumber: { type: String, required: true },
+    isVerified: { type: Boolean, default: false },
+    verificationToken: { type: String, default: crypto.randomBytes(32).toString('hex') },
 })
 
 const User = mongoose.model("User", userSchema)
